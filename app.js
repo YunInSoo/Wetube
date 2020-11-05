@@ -3,6 +3,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookiePaser from "cookie-parser";
 import bodyPaser from "body-parser";
+import { localsMiddleware } from "./middlewares";
 import userRouter from "./router/userRouter";
 import videoRouter from "./router/videoRouter";
 import globalRouter from "./router/globalRouter";
@@ -17,11 +18,14 @@ const betweenHome = (req, res, next) => {
   next();
 };
 
+app.use(helmet());
+app.use(localsMiddleware);
+//밑에 부분은 views템플리안있는 영역을 건들수 있게 도와주는 부분입니다.
+app.set("view engine", "pug");
 //middleware 부분
 app.use(cookiePaser());
 app.use(bodyPaser.json());
 app.use(bodyPaser.urlencoded({ extended: true }));
-app.use(helmet());
 app.use(morgan("dev"));
 
 /*middleware 예제 get, post 안에 넣어도 되고 
