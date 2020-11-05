@@ -3,7 +3,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookiePaser from "cookie-parser";
 import bodyPaser from "body-parser";
-import { localsMiddleware } from "./middlewares";
+import { localsMiddleware, securityPolicy } from "./middlewares";
 import userRouter from "./router/userRouter";
 import videoRouter from "./router/videoRouter";
 import globalRouter from "./router/globalRouter";
@@ -19,6 +19,8 @@ const betweenHome = (req, res, next) => {
 };
 
 app.use(helmet());
+//https://developers.google.com/web/fundamentals/security/csp?hl=ko 보안에 막혀 열어주는 방식입니다.
+app.use(securityPolicy);
 app.use(localsMiddleware);
 //밑에 부분은 views템플리안있는 영역을 건들수 있게 도와주는 부분입니다.
 app.set("view engine", "pug");
