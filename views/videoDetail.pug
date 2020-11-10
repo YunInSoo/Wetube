@@ -1,7 +1,11 @@
 extends layouts/main
 include mixins/videoBlock
 block content
-    .video
-        video.videoBlock__thumbnail(src=${fileUrl}, autoplay=true,controls=true)
-        h4.videoBlock__title=title=title
+    .video__player
+        video(src=`/${video.fileUrl}`, autoplay=true,controls=true)
+    .video__info
+        a(href=routes.editVideo(video.id)) Edit video
+        h5.videoBlock__title=video.title
+        span.video__views=video.views
+        p.video.description=video.description
         
