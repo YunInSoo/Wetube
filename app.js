@@ -29,6 +29,7 @@ app.use(cookiePaser());
 app.use(bodyPaser.json());
 app.use(bodyPaser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use("/uploads", express.static("uploads"));
 
 /*middleware 예제 get, post 안에 넣어도 되고 
 그냥 전체적인 middleware 사용하기 위해서는 

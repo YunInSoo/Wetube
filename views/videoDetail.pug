@@ -1,3 +1,7 @@
 extends layouts/main
+include mixins/videoBlock
 block content
-    p videoDetail
+    .video
+        video.videoBlock__thumbnail(src=${fileUrl}, autoplay=true,controls=true)
+        h4.videoBlock__title=title=title
+        
