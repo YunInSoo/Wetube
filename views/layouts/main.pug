@@ -1,10 +1,14 @@
 doctype html
 html
+    //- meta(http-equiv="Content-Security-Policy", content="default-src 'self'; script-src 'self'; style-src 'self'; ")
+
     head
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.15.1/css/all.css", integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp", crossorigin="anonymous")
         title #{siteName} | #{pageTitle}
+        link(rel="stylesheet", href="/static/main.css")
     body
         include ../partials/header
         main
             block content
         include ../partials/footer
+    script(src="/static/main.js")

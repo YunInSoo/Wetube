@@ -5,7 +5,6 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
   try {
     const videos = await Video.find({}).sort({ createdAt: -1 });
-    console.log(videos);
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
@@ -13,13 +12,24 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const {
-    query: { term: searchingFor },
+    query: { term: searchingBy },
   } = req;
+
+  let videos = [];
+
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
   res.render("search", {
     pageTitle: "search",
-    searchingFor: searchingFor,
+    searchingBy,
     videos,
   });
 };
